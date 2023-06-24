@@ -5,14 +5,12 @@ const saved =document.querySelector('.saved');
 
 
 
+
 keys.forEach(key=>{
 
     key.addEventListener('click', event=>{
 
             const key_contend=key.innerHTML;
-
-
-            console.log(add);
 
             if (key_contend==='AC') {
 
@@ -29,9 +27,18 @@ keys.forEach(key=>{
             add.textContent='';
 
             }
+
+        const qw=console.log(+saved.textContent)
+
+        console.log(typeof(qw))
+
     })
 
 
 });
+
+
+
+
 
 
