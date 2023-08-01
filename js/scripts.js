@@ -1,66 +1,140 @@
-const keys=document.querySelectorAll('.keys button');
+const numeros= document.querySelectorAll('.boton');
+const operadores= document.querySelectorAll('.operador');
+const igual= document.querySelector('.ejecutar');
+const ac=document.querySelector('.limpiar');
 
-const add =document.querySelector('.add');
-const saved =document.querySelector('.saved');
+const saved=document.querySelector('.display .saved');
+const add=document.querySelector('.display .add');
 
-const suma=32+2;
+const done=document.querySelector('.saved_p');
 
-console.log(typeof(suma))
-
-
-
+var operacion='';
+var resultado='';
 
 
 
-keys.forEach(key=>{
 
-    key.addEventListener('click', event=>{
+numeros.forEach(key => {
+    
+    key.addEventListener('click', number=>{
 
-        print(key);
+        const numero=key.innerHTML;
+
+        añadir(numero);
 
     })
+
+});
+
+operadores.forEach(operador => {
+    
+    operador.addEventListener('click', event=>{
+
+        const dation=operador.getAttribute('data-action');
+
+        añadir('',dation)
+
+
+    })
+
 });
 
 
+ac.addEventListener('click',e=>{
 
-function print(key){
+    done.textContent='';
+    saved.textContent='';
 
-    const key_contend=key.innerHTML;
 
-    if (key_contend==='AC') {
+})
 
-        add.textContent=0;
-        saved.textContent='';          
-        
-    }
-    else{
 
-    add.textContent=key_contend;
+
+
+
+function añadir(numero, dation) {
+
+
+
+    add.textContent=numero;
 
     saved.textContent=saved.textContent+add.textContent;
 
     add.textContent='';
 
+
+    if(dation!==undefined){
+
+        done.textContent=saved.textContent;
+
+        saved.textContent='';
+
     }
 
-    operative()
+    calcular(done.textContent, saved.textContent,dation)
 
 };
 
 
-function operative(){
+function calcular(done,saved,dation){
 
-    const igual=document.querySelector('.igual');
-    const valor=saved.textContent;
+    const done_int=parseInt(done);
+    const saved_int=parseInt(saved);
 
-    igual.addEventListener('click',()=>{
 
-    parseInt(valor,10)
+    if(dation!==undefined){
+
+        operacion=dation;
+
+    }
+    if (isNaN(done_int)||isNaN(saved_int)) return
+
+    if(operacion==='suma'){
+
+        var resultado=done_int+saved_int;
+
+    }
+
+    if(operacion==='resta'){
+
+        var resultado=done_int-saved_int;
+
+    }
+
+
+    if(operacion==='multiplicacion'){
+
+        var resultado=done_int*saved_int;
+
+    }
+
+
+    if(operacion==='division'){
+
+        var resultado=done_int/saved_int;
+
+    }
+
+    imp_resultado(resultado);
     
-    console.log(typeof(valor))
 
 
-    })
+};
+
+
+function imp_resultado(resultado){
+
+igual.addEventListener('click',e=>{
+
+    console.log( resultado );
+
+    saved.textContent=resultado;
+
+    done.textContent='';
+
+
+
+});
 
 
 
